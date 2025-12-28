@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Para Ti 💖</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0f1020;
+      --card:#181a3a;
+      --accent:#ff6fae;
+      --soft:#ffd1e6;
+      --text:#f6f7ff;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; font-family:Montserrat,system-ui;
+      background: radial-gradient(1200px 600px at 10% -10%, #2a2d7a, transparent),
+                  radial-gradient(800px 500px at 90% 10%, #7a2a5a, transparent),
+                  var(--bg);
+      color:var(--text);
+      min-height:100vh;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .screen{display:none; max-width:720px; width:90%; position:relative;}
+    .active{display:block}
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)), var(--card);
+      border-radius:20px; padding:32px; box-shadow:0 20px 50px rgba(0,0,0,.35);
+      text-align:center;
+      animation:fade .6s ease;
+    }
+    @keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1}}
+    h1,h2{font-family:"Playfair Display", serif}
+    button{
+      margin:10px; padding:12px 22px; border-radius:999px; border:none; cursor:pointer;
+      background:linear-gradient(135deg, var(--accent), var(--soft));
+      font-size:1rem; color:#0b0b18;
+      box-shadow:0 10px 24px rgba(255,111,174,.35);
+    }
+    .emoji{
+      position:absolute;
+      font-size:22px;
+      animation:floatUp 1.8s ease-out forwards;
+      pointer-events:none;
+    }
+    @keyframes floatUp{
+      from{opacity:0; transform:translateY(20px) scale(0.8)}
+      20%{opacity:1}
+      to{opacity:0; transform:translateY(-60px) scale(1.2)}
+    }
+  </style>
+</head>
+<body>
+
+<div id="welcome" class="screen active">
+  <div class="card">
+    <h1>Para <span style="color:var(--accent)">[MI PRINCES]</span> 💖</h1>
+    <p>Hice este pequeño detalle interactivo porque hay algo que me gustaría compartir contigo…</p>
+    <button onclick="go('q1')">Comenzar el viaje ✈️</button>
+    <audio id="music" src="musica-suave.mp3" loop></audio>
+  </div>
+</div>
+
+<div id="q1" class="screen">
+  <div class="card">
+    <h2>Lugares que ya forman parte de tu historia 🌍</h2>
+    <p>Hay viajes que marcan etapas… y otros que simplemente despiertan ganas de seguir explorando.</p>
+
+    <button onclick="answer('Sí, descubrir nuevos lugares suena bonito 💫','q2','Viajar','🌍')">💫 Sí, descubrir nuevos lugares</button>
+    <p style="opacity:.8;font-size:.95rem">Siempre hay un rincón nuevo esperando ser vivido.</p>
+
+    <button onclick="answer('Tal vez, paso a paso 🌎','q2','Viajar','🌎')">🌎 Tal vez, con calma</button>
+    <p style="opacity:.8;font-size:.95rem">Los mejores caminos no se apresuran.</p>
+
+    <button onclick="answer('Me gusta compartir historias 💛','q2','Viajar','💛')">💛 Prefiero compartir historias</button>
+    <p style="opacity:.8;font-size:.95rem">Cada viaje contado guarda algo especial.</p>
+  </div>
+</div>
+</div>
+
+<div id="response" class="screen">
+  <div class="card">
+    <p id="text"></p>
+    <button onclick="go(next)">Continuar</button>
+  </div>
+</div>
+
+<div id="q2" class="screen">
+  <div class="card">
+    <h2>Momentos especiales ✨</h2>
+    <p>Cuando un viaje se vuelve especial, ¿qué momento lo hace inolvidable para ti?</p>
+
+    <button onclick="answer('Mirar el atardecer y pensar','qTravel',null,'Momento','🌇')">🌇 Mirar el atardecer y pensar</button>
+    <p style="opacity:.8;font-size:.95rem">Hay instantes en los que el cielo baja el ritmo y todo se siente en calma.</p>
+
+    <button onclick="answer('Un café, una conversación, calma','qTravel',null,'Momento','☕')">☕ Un café, una conversación, calma</button>
+    <p style="opacity:.8;font-size:.95rem">Las mejores charlas no tienen prisa ni reloj.</p>
+
+    <button onclick="answer('Caminar sin rumbo','qTravel',null,'Momento','🗺️')">🗺️ Caminar sin rumbo</button>
+    <p style="opacity:.8;font-size:.95rem">A veces perderse es la mejor manera de descubrir algo bonito.</p>
+
+    <button onclick="answer('Momentos que quiero recordar','qTravel',null,'Momento','📸')">📸 Momentos que quiero recordar</button>
+    <p style="opacity:.8;font-size:.95rem">Porque hay recuerdos que merecen quedarse para siempre.</p>
+  </div>
+</div>
+</div>
+
+<div id="qTravel" class="screen">
+  <div class="card">
+    <h2>Pequeños placeres al viajar ✨</h2>
+    <p>No siempre es el destino… a veces es lo que se siente en el camino.</p>
+
+    <button onclick="answer('Cafés tranquilos ☕','q3','Gustos','☕')">☕ Cafés tranquilos</button>
+    <p style="opacity:.8;font-size:.95rem">Un lugar donde las conversaciones fluyen sin prisa.</p>
+
+    <button onclick="answer('Atardeceres 🌇','q3','Gustos','🌇')">🌇 Atardeceres</button>
+    <p style="opacity:.8;font-size:.95rem">Cuando el cielo cambia de color y todo se detiene un momento.</p>
+
+    <button onclick="answer('Perderte sin plan 🗺️','q3','Gustos','🗺️')">🗺️ Perderse sin plan</button>
+    <p style="opacity:.8;font-size:.95rem">Dejar que la ciudad sorprenda.</p>
+
+    <button onclick="answer('Guardar recuerdos 📸','q3','Gustos','📸')">📸 Guardar recuerdos</button>
+    <p style="opacity:.8;font-size:.95rem">Para volver a sonreír más adelante.</p>
+  </div>
+</div>
+</div>
+
+<div id="q3" class="screen">
+  <div class="card">
+    <h2>Las estaciones ❄️☀️</h2>
+    <p>Cada estación tiene su encanto… y su forma de sentirse.</p>
+
+    <button onclick="answer('Primavera 🌸','final','Estación','🌸')">🌸 Primavera</button>
+    <p style="opacity:.8;font-size:.95rem">Comienzos suaves y aire nuevo.</p>
+
+    <button onclick="answer('Verano ☀️','final','Estación','☀️')">☀️ Verano</button>
+    <p style="opacity:.8;font-size:.95rem">Días largos y risas que se estiran.</p>
+
+    <button onclick="answer('Otoño 🍂','final','Estación','🍂')">🍂 Otoño</button>
+    <p style="opacity:.8;font-size:.95rem">Colores tranquilos y momentos que invitan a pensar.</p>
+
+    <button onclick="answer('Invierno ❄️','final','Estación','❄️')">❄️ Invierno</button>
+    <p style="opacity:.8;font-size:.95rem">Calor compartido y silencios bonitos.</p>
+  </div>
+</div>
+</div>
+
+<div id="final" class="screen">
+  <div class="card">
+    <h2>Gracias por este pequeño viaje 💌</h2>
+    <p>Si algún día te apetece, me encantaría escucharte hablar de viajes y de qué podría ser de nosotros con una salida juntos.</p>
+    <p style="margin-top:20px; font-size:1.05rem; opacity:.9">No hay respuestas correctas. Todo está bien 💫</p>
+    <button onclick="finalAnswer('Sí, me gustaría 💖','💖')">💖 Sí, me gustaría</button>
+    <button onclick="finalAnswer('Tal vez, con calma 🌷','🌷')">🌷 Tal vez, con calma</button>
+    <button onclick="finalAnswer('No por ahora 🤍','🤍')">🤍 No por ahora</button>
+    <button style="margin-top:25px" onclick="shareChoices()">Enviar mis respuestas</button>
+    <p style="margin-top:20px">Con cariño,<br><strong>[Joshi]</strong></p>
+  </div>
+</div>
+
+<script>
+  let next = 'q2';
+  const choices = {};
+  window.pendingEmojis = null;
+
+  function go(id){
+    document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+    const target = document.getElementById(id);
+    if(target) target.classList.add('active');
+
+    if(id === 'response' && typeof window.pendingEmojis === 'string'){
+      const em = window.pendingEmojis;
+      window.pendingEmojis = null;
+      spawnEmojis(em);
+    }
+
+    const music = document.getElementById('music');
+    if(music && music.paused){
+      music.volume = 0.4;
+      music.play().catch(()=>{});
+    }
+  }
+
+  function answer(msg, goNext, key, emojis){
+    const poetic = getPoeticMessage(msg);
+    document.getElementById('text').textContent = poetic;
+    if(key) choices[key] = msg;
+    next = goNext;
+    window.pendingEmojis = emojis || '💫';
+    go('response');
+  }
+
+  function getPoeticMessage(msg){
+    if(msg.includes('Atardeceres')){
+      return 'Hay algo especial en los atardeceres… como si el mundo bajara la voz. Y sin importar la respuesta, sería bonito seguir compartiendo momentos así contigo 🌇';
+    }
+    if(msg.includes('Cafés')){
+      return 'Los cafés tranquilos tienen magia: conversaciones suaves, miradas sinceras y tiempo que no corre ☕';
+    }
+    if(msg.includes('Sin plan')){
+      return 'Perderse sin plan a veces es la forma más bonita de descubrir a alguien, poco a poco 🗺️';
+    }
+    if(msg.includes('Recuerdos')){
+      return 'Hay momentos que se quedan para siempre, incluso cuando solo se viven con calma 📸';
+    }
+    if(msg.includes('Primavera')){
+      return 'La primavera siempre trae comienzos bonitos, incluso cuando no se planean 🌸';
+    }
+    if(msg.includes('Verano')){
+      return 'El verano huele a risas largas, luz dorada y momentos que se sienten libres ☀️';
+    }
+    if(msg.includes('Otoño')){
+      return 'El otoño enseña que conocer a alguien también puede ser un proceso sereno y bonito 🍂';
+    }
+    if(msg.includes('Invierno')){
+      return 'El invierno invita a acercarse, a compartir calor y silencios sinceros ❄️';
+    }
+    return 'Estar conocientote es lo mejor que paso este año.💝';
+  }
+
+  function spawnEmojis(emojis){
+    if(!emojis) return;
+    const screen = document.querySelector('.screen.active') || document.body;
+    for(let i=0;i<8;i++){
+      const e = document.createElement('div');
+      e.className = 'emoji';
+      e.textContent = emojis;
+      e.style.left = Math.random()*80 + 10 + '%';
+      e.style.bottom = '20px';
+      screen.appendChild(e);
+      setTimeout(()=>e.remove(),1800);
+    }
+  }
+
+  function finalAnswer(msg, emoji){
+    choices['Final'] = msg;
+    spawnEmojis(emoji);
+  }
+
+  function shareChoices(){
+    let summary = 'Mis respuestas en el viaje ✈️%0A%0A';
+    Object.values(choices).forEach(v => summary += '- ' + v + '%0A');
+    window.open('https://wa.me/?text=' + summary, '_blank');
+  }
+</script>
+</body>
+</html>
